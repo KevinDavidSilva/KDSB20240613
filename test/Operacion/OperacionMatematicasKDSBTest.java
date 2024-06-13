@@ -11,17 +11,16 @@ class OperacionMatematicasKDSBTest {
         OperacionMatematicasKDSB operaciones = new OperacionMatematicasKDSB();
 
 
-        double[] numeros = {16, 0, 0.0001, 4};
+        assertEquals(2.0, operaciones.calcularRaizCuadrada(4.0), 0.0001);
 
 
-        for (double numero : numeros) {
-            try {
-                double resultado = operaciones.calcularRaizCuadrada(numero);
-                System.out.println("La raíz cuadrada de " + numero + " es: " + resultado);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Excepción para el número " + numero + ": " + e.getMessage());
-            }
-        }
+        assertEquals(0.0, operaciones.calcularRaizCuadrada(0.0), 0.0001);
+
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            operaciones.calcularRaizCuadrada(-1.0);
+        });
+        assertEquals("El número no puede ser negativo", exception.getMessage());
     }
 
 }
